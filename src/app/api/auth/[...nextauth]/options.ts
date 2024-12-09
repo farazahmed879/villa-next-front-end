@@ -8,7 +8,7 @@ export const options: NextAuthOptions = {
       credentials: {
         username: {
           label: "email",
-          type: "email",
+          type: "text",
           placeholder: "your-Email",
         },
         password: {
@@ -28,14 +28,15 @@ export const options: NextAuthOptions = {
 
         try {
           const response = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/users/login`,
+            // `${process.env.NEXT_PUBLIC_BASE_URL}/users/login`,
+            `https://localhost:7002/users/login`,
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                email: credentials.username,
+                username: credentials.username,
                 password: credentials.password,
               }),
             }

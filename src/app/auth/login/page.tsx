@@ -105,7 +105,7 @@ export default function SignIn({
     console.log("HIt");
     const res = await signIn("credentials", {
       redirect: false,
-      username: form.email,
+      username: form.username,
       password: form.password,
     });
     if (res?.error) {
@@ -211,9 +211,9 @@ export default function SignIn({
                   <CustomInput
                     label="Email"
                     control={control}
-                    name="email"
+                    name="username"
                     errors={errors}
-                    type="email"
+                    type="text"
                   />
                 </Grid>
                 <Grid size={12}>
