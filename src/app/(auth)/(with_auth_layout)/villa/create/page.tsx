@@ -1,15 +1,20 @@
-import CustomButton from "@/Components/CustomButton";
+"use client"
+import Grid2 from "@mui/material/Grid2";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useState } from "react";
 import CustomInput from "@/Components/CustomInput";
-import { Grid2 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import CustomButton from "@/Components/CustomButton";
+import { File } from "buffer";
 
-export default function Users() {
+export default function ClientForm() {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   type Inputs = {
     name: string;
     email: string;
-    password: string;
-    role: string;
-    file: string;
+    description: string;
+    location: string;
+    file: File;
   };
 
   const {
@@ -20,9 +25,13 @@ export default function Users() {
     watch,
   } = useForm<Inputs>();
 
-  const createNewUser = async (data: Inputs) => {
+  const handleFileChange = (event: any) => {
+    setSelectedImage(event.target.files[0]);
+  };
+
+  const submitClientData = async (data: Inputs) => {
     try {
-      const response = await fetch("http://localhost:8080/users", {
+      const response = await fetch("http://localhost:8080/client", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,16 +40,17 @@ export default function Users() {
       });
 
       if (response.ok) {
-        alert("New user created!");
+        alert("Client added successfully!");
       } else {
         const errorData = await response.json();
         console.error("Error:", errorData);
       }
     } catch (error) {
-      console.error("Network error:", error);
-      alert("Failed to add user!");
+      console.error("Network error", error);
+      alert("An error has occurred, please try again");
     }
   };
+
   return (
     <>
       <div
@@ -52,7 +62,7 @@ export default function Users() {
           paddingBottom: "30px",
         }}
       >
-        <h2>New User Details</h2>
+        <h2>New Client Details</h2>
       </div>
 
       <Grid2
@@ -60,9 +70,16 @@ export default function Users() {
         spacing={3}
         style={{ width: "80vw", paddingLeft: "3rem" }}
       >
-        <form onSubmit={handleSubmit(createNewUser)} style={{}}>
+        <form
+          onSubmit={handleSubmit(submitClientData)}
+          style={{
+           
+          }}
+        >
           <Grid2 container spacing={6}>
+           
             <Grid2
+       
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -76,48 +93,44 @@ export default function Users() {
                 name="name"
                 errors={errors}
               />
-
               <CustomInput
                 label="Email"
                 control={control}
                 name="email"
                 errors={errors}
               />
+              
             </Grid2>
 
+       
             <Grid2
+    
               style={{
                 display: "flex",
                 flexDirection: "column",
                 gap: "20px",
                 width: "30vw",
-                marginLeft: "8rem",
+                marginLeft:"8rem"
               }}
             >
               <CustomInput
-                label="password"
+                label="Description"
                 control={control}
-                name="password"
+                name="description"
                 errors={errors}
-                type="password"
               />
-
               <CustomInput
-                label="Role"
+                label="Location"
                 control={control}
-                name="role"
+                name="location"
                 errors={errors}
-                options={[
-                  { label: "Admin", value: "Admin" },
-                  { label: "Normal", value: "Normal" },
-                ]}
               />
             </Grid2>
           </Grid2>
-          <div style={{ marginTop: "2rem" }}>
+          <div style={{marginTop:"2rem",}}>
             <CustomButton
               variant="contained"
-              text="Add new User"
+              text="Add new Client +"
               color="success"
               buttonType="submit"
             />

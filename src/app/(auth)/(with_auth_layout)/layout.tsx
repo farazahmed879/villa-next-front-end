@@ -9,13 +9,7 @@ import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Box, Skeleton, Typography } from "@mui/material";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Outlet,
-  useRoutes,
-} from "react-router-dom";
+
 // import CustomButton from "@/Components/CustomButton";
 // import AdminPanel from "./admin-panel/page";
 // import { userInfo } from "os";
@@ -24,9 +18,7 @@ import {
 // } from "./SidebarFooterAccount";
 import { PageContainer } from "@toolpad/core/PageContainer";
 import Link from "next/link";
-import Dashboard from "./dashboard/page";
-import ProductForm from "./products/page";
-import Clients from "./clients/page";
+import Clients from "./villa/page";
 
 const NAVIGATION: Navigation = [
   {
@@ -125,7 +117,7 @@ export default function DashboardLayoutBasic(props: any) {
 
   const authentication = React.useMemo(() => {
     return {
-      signIn: () => {},
+      signIn: () => { },
       signOut: () => {
         signOut();
       },

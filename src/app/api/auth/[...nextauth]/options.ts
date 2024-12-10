@@ -1,7 +1,5 @@
 import type { NextAuthOptions } from "next-auth";
-import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "axios";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -10,7 +8,7 @@ export const options: NextAuthOptions = {
       credentials: {
         userName: {
           label: "email",
-          type: "email",
+          type: "text",
           placeholder: "your-Email",
         },
         password: {

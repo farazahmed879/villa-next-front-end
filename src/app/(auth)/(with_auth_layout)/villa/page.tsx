@@ -17,12 +17,12 @@ const Clients: React.FC = () => {
   const [data, setData] = React.useState([]);
   const [filter, setFilter] = React.useState("");
 
-  const handleEdit = () => {};
+  const handleEdit = () => { };
 
   const router = useRouter();
 
   const handlePath = () => {
-    router.replace("/clients/create");
+    router.replace("/villa/create");
   };
 
   const columns: readonly Column[] = [
@@ -93,14 +93,6 @@ const Clients: React.FC = () => {
 
       {mode == FORMMODES.GRID ? (
         <>
-          {/* <CustomButton handleClick={handleClick} text="Add" />
-    <DashboardLayoutBasic>
-      <div style={{ width: "100%" }}>
-        {mode == FORMMODES.GRID ? (
-          <>
-            {/* <CustomButton handleClick={handleClick} text="Add" />
-
-          <CustomButton handleClick={handleFilter} text="Search" /> */}
           <CustomGrid
             handleChangePage={handleChangePage}
             handleChangeRowsPerPage={handleChangeRowsPerPage}
@@ -113,7 +105,7 @@ const Clients: React.FC = () => {
       ) : mode == FORMMODES.ADD ? (
         <></>
       ) : // <CreateOrEditStudents handleMode={(e) => setMode(e)} />
-      null}
+        null}
     </div>
     // </DashboardLayoutBasic>
   );

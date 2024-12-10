@@ -99,7 +99,7 @@ export default function SignIn({ setIsSignPage }: { setIsSignPage: any }) {
     console.log("HIt");
     const res = await signIn("credentials", {
       redirect: false,
-      userName: form.email,
+      username: form.username,
       password: form.password,
     });
     if (res?.error) {
@@ -213,7 +213,7 @@ export default function SignIn({ setIsSignPage }: { setIsSignPage: any }) {
                       <CustomInput
                         label="Username"
                         control={control}
-                        name="email"
+                        name="username"
                         errors={errors}
                         type="text"
                       />
