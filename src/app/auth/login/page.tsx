@@ -65,13 +65,7 @@ type Inputs = {
   exampleRequired: string;
 };
 
-export default function SignIn({
-  disableCustomTheme = false,
-  setIsSignPage,
-}: {
-  disableCustomTheme?: boolean;
-  setIsSignPage: any;
-}) {
+export default function SignIn({ setIsSignPage }: { setIsSignPage: any }) {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordError, setPasswordError] = React.useState(false);
@@ -105,28 +99,31 @@ export default function SignIn({
     console.log("HIt");
     const res = await signIn("credentials", {
       redirect: false,
-      username: form.email,
+      userName: form.email,
       password: form.password,
     });
     if (res?.error) {
       setErrorMessage("Invalid Username or Password");
     } else {
-      router.push("/dashboard");
+      router.replace("/dashboard");
     }
   };
 
   const handleLogin = async (form: any) => {
     try {
-      const response = await fetch("http://localhost:8080/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: form.username,
-          password: form.password,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/users/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: form.username,
+            password: form.password,
+          }),
+        }
+      );
 
       if (!response.ok) {
         console.error("Failed to authneticate user:", response.statusText);
@@ -178,12 +175,15 @@ export default function SignIn({
     return isValid;
   };
 
-
-  React.useEffect(() => {
-    if (sessionStatus === "authenticated") {
-      router.replace("/dashboard");
-    }
-  }, [sessionStatus, router]);
+  // React.useEffect(() => {
+  //   if (sessionStatus === "authenticated") {
+  //     router.replace("/dashboard");
+  //   }
+  // }, [sessionStatus, router]);
+  if (sessionStatus === "loading") {
+    return;
+    <>...Loading</>;
+  }
 
   return (
     <AppTheme>
@@ -193,76 +193,82 @@ export default function SignIn({
           sx={{ position: "fixed", top: "1rem", right: "1rem" }}
         />
         <Card variant="outlined">
-          <Typography
-            component="h1"
-            variant="h4"
-            sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
-          >
-            Sign in
-          </Typography>
+          {sessionStatus === "unauthenticated" ? (
+            <>
+              <Typography
+                component="h1"
+                variant="h4"
+                sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
+              >
+                Sign in
+              </Typography>
 
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            style={{ display: "flex", flexDirection: "column", gap: 2 }}
-          >
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container spacing={2}>
-                <Grid size={12}>
-                  <CustomInput
-                    label="Email"
-                    control={control}
-                    name="email"
-                    errors={errors}
-                    type="email"
-                  />
-                </Grid>
-                <Grid size={12}>
-                  <CustomInput
-                    label="Password"
-                    control={control}
-                    name="password"
-                    errors={errors}
-                    type="password"
-                  />
-                </Grid>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                style={{ display: "flex", flexDirection: "column", gap: 2 }}
+              >
+                <Box sx={{ flexGrow: 1 }}>
+                  <Grid container spacing={2}>
+                    <Grid size={12}>
+                      <CustomInput
+                        label="Username"
+                        control={control}
+                        name="email"
+                        errors={errors}
+                        type="text"
+                      />
+                    </Grid>
+                    <Grid size={12}>
+                      <CustomInput
+                        label="Password"
+                        control={control}
+                        name="password"
+                        errors={errors}
+                        type="password"
+                      />
+                    </Grid>
 
-                <Grid size={12}>
-                  {/* <Button fullWidth variant="contained">
+                    <Grid size={12}>
+                      {/* <Button fullWidth variant="contained">
                     Sign In
                     </Button> */}
-                  <CustomButton
-                    buttonType="submit"
-                    variant="contained"
-                    text="Sign In"
-                    color="secondary"
-                  ></CustomButton>
-                </Grid>
-              </Grid>
-            </Box>
-          </form>
+                      <CustomButton
+                        buttonType="submit"
+                        variant="contained"
+                        text="Sign In"
+                        color="secondary"
+                      ></CustomButton>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </form>
 
-          <Divider>or</Divider>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            {/* <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => alert('Sign in with Google')}
-              startIcon={<GoogleIcon />}
-            >
-              Sign in with Google
-            </Button> */}
-
-            <Typography sx={{ textAlign: "center" }}>
-              Don&apos;t have an account?{" "}
-              <Link
-                onClick={() => setIsSignPage(false)}
-                variant="body2"
-                sx={{ alignSelf: "center" }}
-              >
-                Sign up
-              </Link>
-            </Typography>
-          </Box>
+              <Divider>or</Divider>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Typography sx={{ textAlign: "center" }}>
+                  Don&apos;t have an account?{" "}
+                  <Link
+                    onClick={() => setIsSignPage(false)}
+                    variant="body2"
+                    sx={{ alignSelf: "center" }}
+                  >
+                    Sign up
+                  </Link>
+                </Typography>
+              </Box>
+            </>
+          ) : (
+            <>
+              Already Login Goto Dashboard{" "}
+              <CustomButton
+                buttonType="button"
+                handleClick={() => router.replace("/dashboard")}
+                variant="contained"
+                text="Dashboard"
+                color="secondary"
+              ></CustomButton>
+            </>
+          )}
         </Card>
       </SignInContainer>
     </AppTheme>

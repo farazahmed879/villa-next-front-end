@@ -2,9 +2,6 @@
 
 import HomeIcon from '@mui/icons-material/Home';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import HeadphonesIcon from '@mui/icons-material/Headphones';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 const Navigation = [
   {

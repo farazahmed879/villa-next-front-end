@@ -1,28 +1,22 @@
-'use client'
+"use client";
 import * as React from "react";
 import { Theme, styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
+import { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import CloseIcon from "@mui/icons-material/Close";
 // import Logo from "../../../public/images/logo.png";
 import {
-  Avatar,
   Button,
-  Grid,
   SwipeableDrawer,
   useMediaQuery,
 } from "@mui/material";
@@ -90,7 +84,7 @@ interface CustomTheme extends Theme {
 }
 
 export default function SideBar(props: any) {
-  const router : any = useRouter();
+  const router: any = useRouter();
   const theme = useTheme() as CustomTheme;
 
   const [open, setOpen] = React.useState(true);

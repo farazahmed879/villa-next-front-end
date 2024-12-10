@@ -1,25 +1,19 @@
 "use client"
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import CustomButton from "../CustomButton";
 import ImageUpload from "../CustomUpload";
 import { useState } from "react";
 import axios from "axios";
-import { headers } from "next/headers";
 
 
-type Inputs = {
-  example: string;
-  exampleRequired: string;
-};
+
 
 const UploadFile = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const {
-    control,
-    formState: { errors },
+    formState: { },
     register,
     handleSubmit,
-    watch,
   } = useForm<any>();
 
   const handleFileChange = (event: any) => {

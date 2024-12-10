@@ -1,8 +1,5 @@
 "use client";
-import React, { memo, useState } from "react";
-import { useForm } from "react-hook-form";
-// import { useDropzone } from "react-dropzone";
-import CustomButton from "./CustomButton";
+import React, { memo } from "react";
 import Image from "next/image";
 import styles from "../global.css";
 

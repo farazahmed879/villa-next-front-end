@@ -1,23 +1,15 @@
-'use client'
+"use client";
 import React from "react";
 
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-import {
-  Avatar,
-  Typography,
-  Button,
-  Grid,
-  SwipeableDrawer,
-  useMediaQuery,
-} from "@mui/material";
+import { Typography } from "@mui/material";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -26,8 +18,8 @@ interface AppBarProps extends MuiAppBarProps {
 const drawerWidth = 250;
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop:any) => prop !== "open",
-})<AppBarProps>(({ theme, open }:any) => ({
+  shouldForwardProp: (prop: any) => prop !== "open",
+})<AppBarProps>(({ theme, open }: any) => ({
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -42,11 +34,11 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-export default function Navbar({ setMobileOpen }:any) {
+export default function Navbar({ setMobileOpen }: any) {
   //   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
-    setMobileOpen((prevState:any) => !prevState);
+    setMobileOpen((prevState: any) => !prevState);
   };
 
   return (
@@ -72,7 +64,7 @@ export default function Navbar({ setMobileOpen }:any) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, }}
+            sx={{ mr: 2 }}
           >
             <MenuIcon />
           </IconButton>

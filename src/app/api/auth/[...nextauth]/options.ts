@@ -1,12 +1,14 @@
 import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
+import axios from "axios";
+
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: {
+        userName: {
           label: "email",
           type: "email",
           placeholder: "your-Email",
@@ -27,15 +29,15 @@ export const options: NextAuthOptions = {
         }
 
         try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/users/login`,
+          const response: any = await fetch(
+            `http://localhost:5165/api/v2/UsersAuth/login`,
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                email: credentials.username,
+                userName: credentials.userName,
                 password: credentials.password,
               }),
             }
@@ -47,13 +49,14 @@ export const options: NextAuthOptions = {
           }
 
           const data = await response.json();
+          console.log("response", data);
 
-          if (data && data.token) {
+          if (data && data.data.accessToken) {
             return {
-              id: data.id,
-              name: data.name,
-              email: data.email,
-              token: data.token,
+              id: data.data?.id,
+              name: data.data?.name,
+              email: data.data?.email,
+              token: data.data.accessToken,
             };
           } else {
             return null;

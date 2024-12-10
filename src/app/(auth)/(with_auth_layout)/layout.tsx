@@ -41,17 +41,13 @@ const NAVIGATION: Navigation = [
 
   {
     segment: "clients",
-    title: "Clients",
+    title: "Villa",
     icon: <ShoppingCartIcon />,
   },
-  {
-    segment: "upload",
-    title: "Uploads",
-    icon: <ShoppingCartIcon />,
-  },
+
   {
     segment: "products",
-    title: "Products",
+    title: "Villa No.",
     icon: <ShoppingCartIcon />,
   },
 ];
@@ -141,11 +137,11 @@ export default function DashboardLayoutBasic(props: any) {
   // Remove this const when copying and pasting into your project.
   const demoWindow = window ? window() : undefined;
 
-  React.useEffect(() => {
-    if (sessionStatus === "unauthenticated") {
-      router1.replace("/auth/login");
-    }
-  }, [sessionStatus, router1]);
+  // React.useEffect(() => {
+  //   if (sessionStatus === "unauthenticated") {
+  //     router1.replace("/auth/login");
+  //   }
+  // }, [sessionStatus, router1]);
 
   if (sessionStatus === "loading") {
     return (
@@ -188,19 +184,23 @@ export default function DashboardLayoutBasic(props: any) {
 
   return (
     <>
-      <AppProvider
-        session={user}
-        authentication={authentication}
-        navigation={NAVIGATION}
-        theme={demoTheme}
-        window={demoWindow}
-        branding={{
-          logo: <img src="https://mui.com/static/logo.png" alt="MUI logo" />,
-          title: "Jami Partners",
-        }}
-      >
-        <DashboardLayout>{children}</DashboardLayout>
-      </AppProvider>
+      {sessionStatus === "unauthenticated" ? (
+        <><Link href={'/auth/login'}> Please Login</Link></>
+      ) : (
+        <AppProvider
+          session={user}
+          authentication={authentication}
+          navigation={NAVIGATION}
+          theme={demoTheme}
+          window={demoWindow}
+          branding={{
+            logo: <img src="https://mui.com/static/logo.png" alt="MUI logo" />,
+            title: "Jami Partners",
+          }}
+        >
+          <DashboardLayout>{children}</DashboardLayout>
+        </AppProvider>
+      )}
     </>
   );
 }
