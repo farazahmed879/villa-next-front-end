@@ -1,20 +1,24 @@
-"use client"
+"use client";
 import Grid2 from "@mui/material/Grid2";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import CustomInput from "@/Components/CustomInput";
 import CustomButton from "@/Components/CustomButton";
 import { File } from "buffer";
+import { useSession } from "next-auth/react";
+import axios from "axios";
 
 export default function ClientForm() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   type Inputs = {
     name: string;
-    email: string;
-    description: string;
-    location: string;
-    file: File;
+    details: string;
+    rate: number;
+    occupancy: number;
+    imageUrl: string;
+    amenity: string;
+    sqft: number;
   };
 
   const {
@@ -29,15 +33,30 @@ export default function ClientForm() {
     setSelectedImage(event.target.files[0]);
   };
 
+  const { data: session, status: sessionStatus } = useSession();
   const submitClientData = async (data: Inputs) => {
+    const obj = { ...data, createdDate: "", createdBy: 0 };
+
+    console.log(obj);
+
+    const token = session?.user?.token;
+    console.log("This is the token", token);
     try {
-      const response = await fetch("http://localhost:8080/client", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response: any = await axios.post(
+        "http://localhost:5165/api/v2/VillaAPI/Create",
+        obj
+      );
+      // const response = await fetch(
+      //   "http://localhost:5165/api/v2/VillaAPI/Create",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //     body: JSON.stringify(obj),
+      //   }
+      // );
 
       if (response.ok) {
         alert("Client added successfully!");
@@ -62,7 +81,7 @@ export default function ClientForm() {
           paddingBottom: "30px",
         }}
       >
-        <h2>New Client Details</h2>
+        <h2>New Villa</h2>
       </div>
 
       <Grid2
@@ -70,16 +89,9 @@ export default function ClientForm() {
         spacing={3}
         style={{ width: "80vw", paddingLeft: "3rem" }}
       >
-        <form
-          onSubmit={handleSubmit(submitClientData)}
-          style={{
-           
-          }}
-        >
+        <form onSubmit={handleSubmit(submitClientData)} style={{}}>
           <Grid2 container spacing={6}>
-           
             <Grid2
-       
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -94,43 +106,65 @@ export default function ClientForm() {
                 errors={errors}
               />
               <CustomInput
-                label="Email"
+                label="Rate"
                 control={control}
-                name="email"
+                name="rate"
+                errors={errors}
+                type="number"
+              />
+
+              <CustomInput
+                label="Amenity"
+                control={control}
+                name="amenity"
                 errors={errors}
               />
-              
+
+              <CustomInput
+                label="Details"
+                control={control}
+                name="details"
+                errors={errors}
+                multiline={true}
+              />
             </Grid2>
 
-       
             <Grid2
-    
               style={{
                 display: "flex",
                 flexDirection: "column",
                 gap: "20px",
                 width: "30vw",
-                marginLeft:"8rem"
+                marginLeft: "8rem",
               }}
             >
               <CustomInput
-                label="Description"
+                label="Occupancy"
                 control={control}
-                name="description"
+                name="occupancy"
                 errors={errors}
+                type="number"
               />
               <CustomInput
-                label="Location"
+                label="Square feet"
                 control={control}
-                name="location"
+                name="sqft"
+                type="number"
+                errors={errors}
+              />
+
+              <CustomInput
+                label="Image URL"
+                control={control}
+                name="imageUrl"
                 errors={errors}
               />
             </Grid2>
           </Grid2>
-          <div style={{marginTop:"2rem",}}>
+          <div style={{ marginTop: "2rem" }}>
             <CustomButton
               variant="contained"
-              text="Add new Client +"
+              text="Add"
               color="success"
               buttonType="submit"
             />

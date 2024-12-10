@@ -81,11 +81,11 @@ const Clients: React.FC = () => {
   }, [mode]);
 
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%", padding:"1rem" }}>
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <CustomButton
           variant="contained"
-          text="Add new Client + "
+          text="Add Villa Number "
           color="success"
           handleClick={handlePath}
         ></CustomButton>

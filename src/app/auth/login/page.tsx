@@ -96,10 +96,10 @@ export default function SignIn({ setIsSignPage }: { setIsSignPage: any }) {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (form: any) => {
-    console.log("HIt");
+    
     const res = await signIn("credentials", {
       redirect: false,
-      username: form.username,
+      userName: form.userName,
       password: form.password,
     });
     if (res?.error) {
@@ -185,6 +185,9 @@ export default function SignIn({ setIsSignPage }: { setIsSignPage: any }) {
     <>...Loading</>;
   }
 
+
+  // console.log('Checking at login',sessionStatus)
+
   return (
     <AppTheme>
       <CssBaseline enableColorScheme />
@@ -213,7 +216,7 @@ export default function SignIn({ setIsSignPage }: { setIsSignPage: any }) {
                       <CustomInput
                         label="Username"
                         control={control}
-                        name="username"
+                        name="userName"
                         errors={errors}
                         type="text"
                       />

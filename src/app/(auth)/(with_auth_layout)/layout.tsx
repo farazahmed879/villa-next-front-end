@@ -19,6 +19,7 @@ import { Box, Skeleton, Typography } from "@mui/material";
 import { PageContainer } from "@toolpad/core/PageContainer";
 import Link from "next/link";
 import Clients from "./villa/page";
+import Layout from "@/Components/layout/page";
 
 const NAVIGATION: Navigation = [
   {
@@ -117,7 +118,7 @@ export default function DashboardLayoutBasic(props: any) {
 
   const authentication = React.useMemo(() => {
     return {
-      signIn: () => { },
+      signIn: () => {},
       signOut: () => {
         signOut();
       },
@@ -177,7 +178,9 @@ export default function DashboardLayoutBasic(props: any) {
   return (
     <>
       {sessionStatus === "unauthenticated" ? (
-        <><Link href={'/auth/login'}> Please Login</Link></>
+        <>
+          <Link href={"/auth/login"}> Please Login</Link>
+        </>
       ) : (
         <AppProvider
           session={user}
@@ -190,7 +193,7 @@ export default function DashboardLayoutBasic(props: any) {
             title: "Jami Partners",
           }}
         >
-          <DashboardLayout>{children}</DashboardLayout>
+          <Layout> {children}</Layout>
         </AppProvider>
       )}
     </>

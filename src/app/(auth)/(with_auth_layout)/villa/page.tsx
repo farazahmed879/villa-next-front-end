@@ -1,5 +1,4 @@
 // src/components/LoginPage.tsx
-
 "use client";
 import CustomButton from "@/Components/CustomButton";
 import CustomGrid from "@/Components/CustomGrid";
@@ -9,6 +8,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import DashboardLayoutBasic from "../layout";
+import { useSession } from "next-auth/react";
 
 const Clients: React.FC = () => {
   const [mode, setMode] = useState<number>(1);
@@ -20,6 +20,11 @@ const Clients: React.FC = () => {
   const handleEdit = () => { };
 
   const router = useRouter();
+  const { data: session, status: sessionStatus } = useSession();
+
+  // console.log('Checking at Villaaaaaaa', sessionStatus)
+
+
 
   const handlePath = () => {
     router.replace("/villa/create");
@@ -62,10 +67,12 @@ const Clients: React.FC = () => {
   };
 
   const getUsers = async (a: any) => {
-    let url = "http://localhost:8080/client";
+    let url = "http://localhost:5165/api/v2/VillaAPI";
     if (a) url += `?key=${a}`;
+  
     const data = await axios.get(url);
-    if (data) setData(data?.data?.content);
+    console.log(data)
+    if (data) setData(data?.data.data);
   };
 
   const handleChange = (e: any) => {
@@ -80,12 +87,15 @@ const Clients: React.FC = () => {
     getUsers("");
   }, [mode]);
 
+
+  console.log(sessionStatus)
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%", padding:"1rem" }}>
+      <h1>Villas</h1>
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <CustomButton
           variant="contained"
-          text="Add new Client + "
+          text="Add new Villa "
           color="success"
           handleClick={handlePath}
         ></CustomButton>
