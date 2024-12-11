@@ -20,11 +20,11 @@ export const dataDisplayCustomizations: Components<Theme> = {
   },
   MuiListItem: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         [`& .${svgIconClasses.root}`]: {
           width: '1rem',
           height: '1rem',
-          color: (theme.vars || theme).palette.text.secondary,
+          color: (theme?.vars || theme).palette.text.secondary,
         },
         [`& .${typographyClasses.root}`]: {
           fontWeight: 500,

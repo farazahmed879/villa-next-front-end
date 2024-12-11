@@ -13,15 +13,15 @@ import { gray, brand } from '../themePrimitives';
 export const navigationCustomizations: Components<Theme> = {
   MuiMenuItem: {
     styleOverrides: {
-      root: ({ theme }) => ({
-        borderRadius: (theme.vars || theme).shape.borderRadius,
+      root: ({ theme }: any) => ({
+        borderRadius: (theme?.vars || theme).shape.borderRadius,
         padding: '6px 8px',
         [`&.${menuItemClasses.focusVisible}`]: {
           backgroundColor: 'transparent',
         },
         [`&.${menuItemClasses.selected}`]: {
           [`&.${menuItemClasses.focusVisible}`]: {
-            backgroundColor: alpha(theme.palette.action.selected, 0.3),
+            backgroundColor: alpha(theme?.palette.action.selected, 0.3),
           },
         },
       }),
@@ -35,17 +35,17 @@ export const navigationCustomizations: Components<Theme> = {
           margin: '0 -8px',
         },
       },
-      paper: ({ theme }) => ({
+      paper: ({ theme }: any) => ({
         marginTop: '4px',
-        borderRadius: (theme.vars || theme).shape.borderRadius,
-        border: `1px solid ${(theme.vars || theme).palette.divider}`,
+        borderRadius: (theme?.vars || theme).shape.borderRadius,
+        border: `1px solid ${(theme?.vars || theme).palette.divider}`,
         backgroundImage: 'none',
         background: 'hsl(0, 0%, 100%)',
         boxShadow:
           'hsla(220, 30%, 5%, 0.07) 0px 4px 16px 0px, hsla(220, 25%, 10%, 0.07) 0px 8px 16px -5px',
         [`& .${buttonBaseClasses.root}`]: {
           '&.Mui-selected': {
-            backgroundColor: alpha(theme.palette.action.selected, 0.3),
+            backgroundColor: alpha(theme?.palette.action.selected, 0.3),
           },
         },
         ...theme.applyStyles('dark', {
@@ -63,15 +63,15 @@ export const navigationCustomizations: Components<Theme> = {
       )),
     },
     styleOverrides: {
-      root: ({ theme }) => ({
-        borderRadius: (theme.vars || theme).shape.borderRadius,
+      root: ({ theme }: any) => ({
+        borderRadius: (theme?.vars || theme).shape.borderRadius,
         border: '1px solid',
         borderColor: gray[200],
-        backgroundColor: (theme.vars || theme).palette.background.paper,
+        backgroundColor: (theme?.vars || theme).palette.background.paper,
         boxShadow: `inset 0 1px 0 1px hsla(220, 0%, 100%, 0.6), inset 0 -1px 0 1px hsla(220, 35%, 90%, 0.5)`,
         '&:hover': {
           borderColor: gray[300],
-          backgroundColor: (theme.vars || theme).palette.background.paper,
+          backgroundColor: (theme?.vars || theme).palette.background.paper,
           boxShadow: 'none',
         },
         [`&.${selectClasses.focused}`]: {
@@ -83,13 +83,13 @@ export const navigationCustomizations: Components<Theme> = {
         },
 
         ...theme.applyStyles('dark', {
-          borderRadius: (theme.vars || theme).shape.borderRadius,
+          borderRadius: (theme?.vars || theme).shape.borderRadius,
           borderColor: gray[700],
-          backgroundColor: (theme.vars || theme).palette.background.paper,
+          backgroundColor: (theme?.vars || theme).palette.background.paper,
           boxShadow: `inset 0 1px 0 1px ${alpha(gray[700], 0.15)}, inset 0 -1px 0 1px hsla(220, 0%, 0%, 0.7)`,
           '&:hover': {
             borderColor: alpha(gray[700], 0.7),
-            backgroundColor: (theme.vars || theme).palette.background.paper,
+            backgroundColor: (theme?.vars || theme).palette.background.paper,
             boxShadow: 'none',
           },
           [`&.${selectClasses.focused}`]: {
@@ -101,7 +101,7 @@ export const navigationCustomizations: Components<Theme> = {
           },
         }),
       }),
-      select: ({ theme }) => ({
+      select: ({ theme }: any) => ({
         display: 'flex',
         alignItems: 'center',
         ...theme.applyStyles('dark', {
@@ -119,8 +119,8 @@ export const navigationCustomizations: Components<Theme> = {
       underline: 'none',
     },
     styleOverrides: {
-      root: ({ theme }) => ({
-        color: (theme.vars || theme).palette.text.primary,
+      root: ({ theme }: any) => ({
+        color: (theme?.vars || theme).palette.text.primary,
         fontWeight: 500,
         position: 'relative',
         textDecoration: 'none',
@@ -132,7 +132,7 @@ export const navigationCustomizations: Components<Theme> = {
           height: '1px',
           bottom: 0,
           left: 0,
-          backgroundColor: (theme.vars || theme).palette.text.secondary,
+          backgroundColor: (theme?.vars || theme).palette.text.secondary,
           opacity: 0.3,
           transition: 'width 0.3s ease, opacity 0.3s ease',
         },
@@ -149,22 +149,22 @@ export const navigationCustomizations: Components<Theme> = {
   },
   MuiDrawer: {
     styleOverrides: {
-      paper: ({ theme }) => ({
-        backgroundColor: (theme.vars || theme).palette.background.default,
+      paper: ({ theme }: any) => ({
+        backgroundColor: (theme?.vars || theme).palette.background.default,
       }),
     },
   },
   MuiPaginationItem: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         '&.Mui-selected': {
           color: 'white',
-          backgroundColor: (theme.vars || theme).palette.grey[900],
+          backgroundColor: (theme?.vars || theme).palette.grey[900],
         },
         ...theme.applyStyles('dark', {
           '&.Mui-selected': {
             color: 'black',
-            backgroundColor: (theme.vars || theme).palette.grey[50],
+            backgroundColor: (theme?.vars || theme).palette.grey[50],
           },
         }),
       }),
@@ -173,28 +173,28 @@ export const navigationCustomizations: Components<Theme> = {
   MuiTabs: {
     styleOverrides: {
       root: { minHeight: 'fit-content' },
-      indicator: ({ theme }) => ({
-        backgroundColor: (theme.vars || theme).palette.grey[800],
+      indicator: ({ theme }: any) => ({
+        backgroundColor: (theme?.vars || theme).palette.grey[800],
         ...theme.applyStyles('dark', {
-          backgroundColor: (theme.vars || theme).palette.grey[200],
+          backgroundColor: (theme?.vars || theme).palette.grey[200],
         }),
       }),
     },
   },
   MuiTab: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         padding: '6px 8px',
         marginBottom: '8px',
         textTransform: 'none',
         minWidth: 'fit-content',
         minHeight: 'fit-content',
-        color: (theme.vars || theme).palette.text.secondary,
-        borderRadius: (theme.vars || theme).shape.borderRadius,
+        color: (theme?.vars || theme).palette.text.secondary,
+        borderRadius: (theme?.vars || theme).shape.borderRadius,
         border: '1px solid',
         borderColor: 'transparent',
         ':hover': {
-          color: (theme.vars || theme).palette.text.primary,
+          color: (theme?.vars || theme).palette.text.primary,
           backgroundColor: gray[100],
           borderColor: gray[200],
         },
@@ -203,7 +203,7 @@ export const navigationCustomizations: Components<Theme> = {
         },
         ...theme.applyStyles('dark', {
           ':hover': {
-            color: (theme.vars || theme).palette.text.primary,
+            color: (theme?.vars || theme).palette.text.primary,
             backgroundColor: gray[800],
             borderColor: gray[700],
           },
@@ -216,9 +216,9 @@ export const navigationCustomizations: Components<Theme> = {
   },
   MuiStepConnector: {
     styleOverrides: {
-      line: ({ theme }) => ({
+      line: ({ theme }: any) => ({
         borderTop: '1px solid',
-        borderColor: (theme.vars || theme).palette.divider,
+        borderColor: (theme?.vars || theme).palette.divider,
         flex: 1,
         borderRadius: '99px',
       }),
@@ -226,7 +226,7 @@ export const navigationCustomizations: Components<Theme> = {
   },
   MuiStepIcon: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         color: 'transparent',
         border: `1px solid ${gray[400]}`,
         width: 12,
@@ -237,21 +237,21 @@ export const navigationCustomizations: Components<Theme> = {
         },
         '&.Mui-active': {
           border: 'none',
-          color: (theme.vars || theme).palette.primary.main,
+          color: (theme?.vars || theme).palette.primary.main,
         },
         '&.Mui-completed': {
           border: 'none',
-          color: (theme.vars || theme).palette.success.main,
+          color: (theme?.vars || theme).palette.success.main,
         },
         ...theme.applyStyles('dark', {
           border: `1px solid ${gray[700]}`,
           '&.Mui-active': {
             border: 'none',
-            color: (theme.vars || theme).palette.primary.light,
+            color: (theme?.vars || theme).palette.primary.light,
           },
           '&.Mui-completed': {
             border: 'none',
-            color: (theme.vars || theme).palette.success.light,
+            color: (theme?.vars || theme).palette.success.light,
           },
         }),
         variants: [
@@ -268,7 +268,7 @@ export const navigationCustomizations: Components<Theme> = {
   },
   MuiStepLabel: {
     styleOverrides: {
-      label: ({ theme }) => ({
+      label: ({ theme }: any) => ({
         '&.Mui-completed': {
           opacity: 0.6,
           ...theme.applyStyles('dark', { opacity: 0.5 }),

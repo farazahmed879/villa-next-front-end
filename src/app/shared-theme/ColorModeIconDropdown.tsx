@@ -25,14 +25,14 @@ export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
     return (
       <Box
         data-screenshot="toggle-mode"
-        sx={(theme) => ({
+        sx={(theme: any) => ({
           verticalAlign: 'bottom',
           display: 'inline-flex',
           width: '2.25rem',
           height: '2.25rem',
-          borderRadius: (theme.vars || theme).shape.borderRadius,
+          borderRadius: (theme?.vars || theme).shape.borderRadius,
           border: '1px solid',
-          borderColor: (theme.vars || theme).palette.divider,
+          borderColor: (theme?.vars || theme).palette.divider,
         })}
       />
     );

@@ -17,11 +17,11 @@ export const inputsCustomizations: Components<Theme> = {
       disableRipple: true,
     },
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         boxSizing: 'border-box',
         transition: 'all 100ms ease-in',
         '&:focus-visible': {
-          outline: `3px solid ${alpha(theme.palette.primary.main, 0.5)}`,
+          outline: `3px solid ${alpha(theme?.palette.primary.main, 0.5)}`,
           outlineOffset: '2px',
         },
       }),
@@ -29,9 +29,9 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiButton: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         boxShadow: 'none',
-        borderRadius: (theme.vars || theme).shape.borderRadius,
+        borderRadius: (theme?.vars || theme).shape.borderRadius,
         textTransform: 'none',
         variants: [
           {
@@ -223,13 +223,13 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiIconButton: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }:any) => ({
         boxShadow: 'none',
-        borderRadius: (theme.vars || theme).shape.borderRadius,
+        borderRadius: (theme?.vars || theme).shape.borderRadius,
         textTransform: 'none',
         fontWeight: theme.typography.fontWeightMedium,
         letterSpacing: 0,
-        color: (theme.vars || theme).palette.text.primary,
+        color: (theme?.vars || theme).palette.text.primary,
         border: '1px solid ',
         borderColor: gray[200],
         backgroundColor: alpha(gray[50], 0.3),
@@ -278,7 +278,7 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiToggleButtonGroup: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         borderRadius: '10px',
         boxShadow: `0 4px 16px ${alpha(gray[400], 0.2)}`,
         [`& .${toggleButtonGroupClasses.selected}`]: {
@@ -295,7 +295,7 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiToggleButton: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         padding: '12px 16px',
         textTransform: 'none',
         borderRadius: '10px',
@@ -320,7 +320,7 @@ export const inputsCustomizations: Components<Theme> = {
       indeterminateIcon: <RemoveRoundedIcon sx={{ height: 14, width: 14 }} />,
     },
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         margin: 10,
         height: 16,
         width: 16,
@@ -381,12 +381,12 @@ export const inputsCustomizations: Components<Theme> = {
       input: {
         padding: 0,
       },
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         padding: '8px 12px',
-        color: (theme.vars || theme).palette.text.primary,
-        borderRadius: (theme.vars || theme).shape.borderRadius,
-        border: `1px solid ${(theme.vars || theme).palette.divider}`,
-        backgroundColor: (theme.vars || theme).palette.background.default,
+        color: (theme?.vars || theme).palette.text.primary,
+        borderRadius: (theme?.vars || theme).shape.borderRadius,
+        border: `1px solid ${(theme?.vars || theme).palette.divider}`,
+        backgroundColor: (theme?.vars || theme).palette.background.default,
         transition: 'border 120ms ease-in',
         '&:hover': {
           borderColor: gray[400],
@@ -426,18 +426,18 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiInputAdornment: {
     styleOverrides: {
-      root: ({ theme }) => ({
-        color: (theme.vars || theme).palette.grey[500],
+      root: ({ theme }: any) => ({
+        color: (theme?.vars || theme).palette.grey[500],
         ...theme.applyStyles('dark', {
-          color: (theme.vars || theme).palette.grey[400],
+          color: (theme?.vars || theme).palette.grey[400],
         }),
       }),
     },
   },
   MuiFormLabel: {
     styleOverrides: {
-      root: ({ theme }) => ({
-        typography: theme.typography.caption,
+      root: ({ theme }: any) => ({
+        typography: theme?.typography.caption,
         marginBottom: 8,
       }),
     },

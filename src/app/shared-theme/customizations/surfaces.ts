@@ -9,12 +9,12 @@ export const surfacesCustomizations: Components<Theme> = {
       disableGutters: true,
     },
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         padding: 4,
         overflow: 'clip',
-        backgroundColor: (theme.vars || theme).palette.background.default,
+        backgroundColor: (theme?.vars || theme).palette.background.default,
         border: '1px solid',
-        borderColor: (theme.vars || theme).palette.divider,
+        borderColor: (theme?.vars || theme).palette.divider,
         ':before': {
           backgroundColor: 'transparent',
         },
@@ -22,19 +22,19 @@ export const surfacesCustomizations: Components<Theme> = {
           borderBottom: 'none',
         },
         '&:first-of-type': {
-          borderTopLeftRadius: (theme.vars || theme).shape.borderRadius,
-          borderTopRightRadius: (theme.vars || theme).shape.borderRadius,
+          borderTopLeftRadius: (theme?.vars || theme).shape.borderRadius,
+          borderTopRightRadius: (theme?.vars || theme).shape.borderRadius,
         },
         '&:last-of-type': {
-          borderBottomLeftRadius: (theme.vars || theme).shape.borderRadius,
-          borderBottomRightRadius: (theme.vars || theme).shape.borderRadius,
+          borderBottomLeftRadius: (theme?.vars || theme).shape.borderRadius,
+          borderBottomRightRadius: (theme?.vars || theme).shape.borderRadius,
         },
       }),
     },
   },
   MuiAccordionSummary: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: any) => ({
         border: 'none',
         borderRadius: 8,
         '&:hover': { backgroundColor: gray[50] },
@@ -57,14 +57,14 @@ export const surfacesCustomizations: Components<Theme> = {
   },
   MuiCard: {
     styleOverrides: {
-      root: ({ theme }) => {
+      root: ({ theme }: any) => {
         return {
           padding: 16,
           gap: 16,
           transition: 'all 100ms ease',
           backgroundColor: gray[50],
-          borderRadius: (theme.vars || theme).shape.borderRadius,
-          border: `1px solid ${(theme.vars || theme).palette.divider}`,
+          borderRadius: (theme?.vars || theme).shape.borderRadius,
+          border: `1px solid ${(theme?.vars || theme).palette.divider}`,
           boxShadow: 'none',
           ...theme.applyStyles('dark', {
             backgroundColor: gray[800],
