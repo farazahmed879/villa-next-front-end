@@ -65,7 +65,7 @@ type Inputs = {
   exampleRequired: string;
 };
 
-export default function SignIn({ setIsSignPage }: { setIsSignPage: any }) {
+export default function SignIn() {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordError, setPasswordError] = React.useState(false);
@@ -96,7 +96,6 @@ export default function SignIn({ setIsSignPage }: { setIsSignPage: any }) {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (form: any) => {
-    
     const res = await signIn("credentials", {
       redirect: false,
       userName: form.userName,
@@ -109,82 +108,9 @@ export default function SignIn({ setIsSignPage }: { setIsSignPage: any }) {
     }
   };
 
-  const handleLogin = async (form: any) => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/users/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: form.username,
-            password: form.password,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        console.error("Failed to authneticate user:", response.statusText);
-        return null;
-      }
-
-      const data = await response.json();
-
-      if (data && data.token) {
-        return {
-          id: data.id,
-          name: data.name,
-          email: data.email,
-          token: data.token,
-        };
-      } else {
-        return null;
-      }
-    } catch (error) {
-      console.error("Error authneticating user", error);
-      return null;
-    }
-  };
-
-  const validateInputs = () => {
-    const email = document.getElementById("email") as HTMLInputElement;
-    const password = document.getElementById("password") as HTMLInputElement;
-
-    let isValid = true;
-
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true);
-      setEmailErrorMessage("Please enter a valid email address.");
-      isValid = false;
-    } else {
-      setEmailError(false);
-      setEmailErrorMessage("");
-    }
-
-    if (!password.value || password.value.length < 6) {
-      setPasswordError(true);
-      setPasswordErrorMessage("Password must be at least 6 characters long.");
-      isValid = false;
-    } else {
-      setPasswordError(false);
-      setPasswordErrorMessage("");
-    }
-
-    return isValid;
-  };
-
-  // React.useEffect(() => {
-  //   if (sessionStatus === "authenticated") {
-  //     router.replace("/dashboard");
-  //   }
-  // }, [sessionStatus, router]);
   if (sessionStatus === "loading") {
-    return;
-    <>...Loading</>;
+    return <>...Loading</>;
   }
-
 
   // console.log('Checking at login',sessionStatus)
 
@@ -251,7 +177,7 @@ export default function SignIn({ setIsSignPage }: { setIsSignPage: any }) {
                 <Typography sx={{ textAlign: "center" }}>
                   Don&apos;t have an account?{" "}
                   <Link
-                    onClick={() => setIsSignPage(false)}
+                    onClick={() => console.log("goto to signup")}
                     variant="body2"
                     sx={{ alignSelf: "center" }}
                   >

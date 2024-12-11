@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
@@ -60,13 +59,7 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export default function SignUp({
-  disableCustomTheme = false,
-  setIsSignPage,
-}: {
-  disableCustomTheme?: boolean;
-  setIsSignPage: any;
-}) {
+export default function SignUp() {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordError, setPasswordError] = React.useState(false);
@@ -75,7 +68,6 @@ export default function SignUp({
   const [nameErrorMessage, setNameErrorMessage] = React.useState("");
   const { data: session, status: sessionStatus } = useSession();
   const router = useRouter();
-
 
   type Inputs = {
     example: string;
@@ -119,23 +111,6 @@ export default function SignUp({
     return isValid;
   };
 
-  // const handleSubmit = (event: any) => {
-  //   if (!validateInputs()) return;
-
-  //   debugger;
-  //   if (nameError || emailError || passwordError) {
-  //     event.preventDefault();
-  //     return;
-  //   }
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     name: data.get("name"),
-  //     lastName: data.get("lastName"),
-  //     email: data.get("email"),
-  //     password: data.get("password"),
-  //   });
-  // };
-
   React.useEffect(() => {
     if (sessionStatus === "authenticated") {
       router.replace("/dashboard");
@@ -145,9 +120,7 @@ export default function SignUp({
   const {
     control,
     formState: { errors },
-    register,
     handleSubmit,
-    watch,
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
@@ -203,9 +176,7 @@ export default function SignUp({
                     errors={errors}
                   />
                 </Grid>
-                <Grid size={12}>
-                  
-                </Grid>
+                <Grid size={12}></Grid>
               </Grid>
               <CustomButton
                 variant="contained"
@@ -222,7 +193,7 @@ export default function SignUp({
             <Typography sx={{ textAlign: "center" }}>
               Already have an account?{" "}
               <Link
-                onClick={() => setIsSignPage(true)}
+                onClick={() => console.log("goto sign in")}
                 variant="body2"
                 sx={{ alignSelf: "center" }}
               >
